@@ -1,0 +1,28 @@
+.example-form {
+    min-width: 50px;
+    max-width: 500px;
+    width: 60%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .center {
+    width: 50rem;
+    height:100vh;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+  }
+
+  .code {
+    background-color: #ff4081;
+    border-radius: 3px;
+    padding-top: 8px; 
+    padding-bottom: 8px; 
+    padding-left: 8px; 
+    padding-right: 8px;
+    color: white;
+    font-weight: 300;
+  }
