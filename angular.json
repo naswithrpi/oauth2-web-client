@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "oauth2-web-client"
+  "defaultProject": "oauth2-web-client",
+  "cli": {
+    "analytics": false
+  }
 }

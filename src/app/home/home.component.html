@@ -19,14 +19,15 @@
   </form> -->
 
 <div class="center">
-
+  <input type="button" value="Dialog" onclick="{
+  Android.showToast(document.getElementById('userdetails').innerText);}" />
   <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
-    
+
     <mat-form-field class="example-full-width">
       <mat-label>Username</mat-label>
       <input matInput formControlName="username">
     </mat-form-field>
-  
+
     <mat-form-field class="example-full-width">
       <mat-label>Password</mat-label>
       <input matInput formControlName="password">
@@ -42,9 +43,11 @@
       <mat-list-item role="listitem">{{authCode}}</mat-list-item>
       <label class="code">Access Token </label>
       <mat-list-item role="listitem">{{accessToken}}</mat-list-item>
+      <label class="code">Client Data </label>
+      <mat-list-item role="listitem">{{userdetails}}</mat-list-item>
+
     </mat-list>
-    
+
   </form>
 
 </div>
-

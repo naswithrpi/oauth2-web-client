@@ -12,19 +12,20 @@ import { UserDetailsModel } from "./UserDetailsModel"
 export class HomeComponent implements OnInit {
 
   loginForm: FormGroup;
-  loginModel : LoginModel = new LoginModel;
+  loginModel: LoginModel = new LoginModel;
   authCode: String;
   accessToken: String;
   userDetailsModel: UserDetailsModel = new UserDetailsModel;
+  userdetails: String;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {
 
     this.loginForm = this.formBuilder.group({
-      username: '',
-      password: ''
+      username: 'grandolf49',
+      password: 'nsproject'
     });
 
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -35,10 +36,11 @@ export class HomeComponent implements OnInit {
 
     console.log(this.loginModel.username, this.loginModel.password);
 
-    this.http.post('http://localhost:8080/login', this.loginModel).subscribe((response) => {
+    this.http.post('http://192.168.0.103:8080/login', this.loginModel).subscribe((response) => {
 
       this.authCode = response['authCode'];
       console.log(response, this.authCode);
+      this.userdetails = "got auth code";
 
       this.getAccessToken();
     })
@@ -46,32 +48,33 @@ export class HomeComponent implements OnInit {
     this.loginForm.reset();
   }
 
-  getAccessToken(){
-    if(this.authCode.length !== 0){
-      this.http.post('http://localhost:8080/getAccessToken', this.authCode).subscribe((response) => {
+  getAccessToken() {
+    if (this.authCode.length !== 0) {
+      this.http.post('http://192.168.0.103:8080/getAccessToken', this.authCode).subscribe((response) => {
         this.accessToken = response['accessToken'];
 
         console.log(response);
+        this.userdetails = "got access token";
 
         this.getUserDetails();
       })
-    }else
+    } else
       console.log("authcode not received");
   }
 
-  getUserDetails(){
-    if(this.accessToken.length !== 0){
-      this.http.post('http://localhost:8080/getUserDetails', this.accessToken).subscribe((response) => {
-        
+  getUserDetails() {
+    if (this.accessToken.length !== 0) {
+      this.userdetails = "trying to get user details...";
+
+      this.http.post('http://192.168.0.103:8080/getUserDetails', this.accessToken).subscribe((response) => {
+
         this.userDetailsModel.userName = atob(response['userName']);
         this.userDetailsModel.email = atob(response['email']);
         this.userDetailsModel.mobile = atob(response['mobile']);
         this.userDetailsModel.dateOfBirth = atob(response['dateOfBirth']);
-        
-        console.log(response, this.userDetailsModel);
+        this.userdetails = "got user details";
       })
-    }else
-    console.log("accessToken not received");
+    } else
+      console.log("accessToken not received");
   }
-
 }
