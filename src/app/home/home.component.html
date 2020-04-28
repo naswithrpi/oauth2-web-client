@@ -19,8 +19,6 @@
   </form> -->
 
 <div class="center">
-  <input type="button" value="Dialog" onclick="{
-  Android.showToast(document.getElementById('userdetails').innerText);}" />
   <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
 
     <mat-form-field class="example-full-width">
@@ -43,9 +41,10 @@
       <mat-list-item role="listitem">{{authCode}}</mat-list-item>
       <label class="code">Access Token </label>
       <mat-list-item role="listitem">{{accessToken}}</mat-list-item>
-      <label class="code">Client Data </label>
-      <mat-list-item role="listitem">{{userdetails}}</mat-list-item>
-
+      <!--label class="code">Client Data </label-->
+      <label hidden id="user_details">{{userdetails}}</label>
+      <input disabled=true onclick="Android.showToast(document.getElementById('user_details').innerText);F" id="btn"
+        type="button" value="Get User Details" />
     </mat-list>
 
   </form>
